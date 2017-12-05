@@ -20,6 +20,7 @@ function renderButtons(){
 		var queryURL = "https://api.giphy.com/v1/gifs/search?api_key=eKcu9um6axWjo4h6ep6kNMAFBY7Z7bOG&q=" + dog + 
 		"&limit=25&offset=0&rating=G&lang=en"; 
 
+
 		$.ajax({
 			url: queryURL, 
 			method: "GET"
@@ -31,17 +32,15 @@ function renderButtons(){
 			for (var j = 0; j < results.length; j++){
 				var gifDiv = $("<div class = 'item'>"); 
 
-				var tittle = results[j].tittle;
-				var p = $("<p>").text("display_name" + tittle);
-
 				var dogImage = $("<img>"); 
 
 				dogImage.attr("src", results[j].images.fixed_height.url); 
 				gifDiv.prepend(dogImage);
-				gifDiv.prepend(p);
-				$("#gifs-appear-here").append(gifDiv); 
+				$("#gifs-appear-here").prepend(gifDiv); 
 
 			}
+
+
 
 
 		})
