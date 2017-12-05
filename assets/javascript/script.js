@@ -1,5 +1,5 @@
 // This is where the buttons will be added when doing the search 
-var puppiesVar = ["Yorkies", "Poodles", "Golden Retrievers", "Golden Doodles", "Mini Golden Doodles", "Pitbulls", "Pugs"]; 
+var puppiesVar = ["Yorkies", "Poodles", "Golden Retrievers", "Pitbulls", "Pugs"]; 
 
 
 
@@ -31,17 +31,14 @@ function renderButtons(){
 			var results = response.data; 
 			for (var j = 0; j < results.length; j++){
 				var gifDiv = $("<div class = 'item'>"); 
-
-				var dogImage = $("<img>"); 
-
+				var dogImage = $("<img data-still='stillImage' data-notstill='notStillImage' data-state='still' id='gif'>"); 
 				dogImage.attr("src", results[j].images.fixed_height.url); 
+				dogImage.attr("data-still", results[j].images.original_still.url); 
+				dogImage.attr("data-notstill", results[j].images.original.url);
 				gifDiv.prepend(dogImage);
 				$("#gifs-appear-here").prepend(gifDiv); 
 
 			}
-
-
-
 
 		})
 
@@ -61,4 +58,16 @@ $("#add-animal").on("click", function(event){
 }); 
 renderButtons();
 
+// Code meant to make image from still to motion. 
 
+$("#gifs-appear-here").on("click", function() {
+
+	if($(this).attr("data-state") == "still") {
+            $(this).attr("src", $(this).attr("data-notstill"));
+            $(this).attr("data-state", "notstill");
+          } else {
+            $(this).attr("src", $(this).attr("data-notstill"));
+          }
+ 
+
+});
